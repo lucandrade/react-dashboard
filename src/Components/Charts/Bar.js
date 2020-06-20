@@ -17,6 +17,18 @@ const DEFAULT_OPTIONS = {
     }]
   },
   tooltips: {
+    backgroundColor: "rgb(255,255,255)",
+    bodyFontColor: "#858796",
+    titleMarginBottom: 10,
+    titleFontColor: '#6e707e',
+    titleFontSize: 14,
+    borderColor: '#dddfeb',
+    borderWidth: 1,
+    xPadding: 15,
+    yPadding: 15,
+    displayColors: false,
+    intersect: false,
+    caretPadding: 10,
     callbacks: {
       label: (tooltipItem, chart) => {
         const datasetLabel = chart.datasets[tooltipItem.datasetIndex].label;
