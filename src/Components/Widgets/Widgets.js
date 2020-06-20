@@ -4,6 +4,7 @@ import { random } from "lodash";
 import Line from "../Charts/Line";
 import Widget from "./Widget";
 import Doughnut from "../Charts/Doughnut";
+import Bar from "../Charts/Bar";
 
 const MONTHS = [
   "Jan","Feb","Mar","Apr","May","Jun",
@@ -11,6 +12,8 @@ const MONTHS = [
 ];
 
 const REVENUE_SOURCES = ["Direct", "Referral", "Social"];
+const DIRECTORS = ["Aadya", "Sinead", "Palash", "Conor", "Jordi"];
+const TEAMS = ["Sales", "Marketing", "HR", "IT"];
 
 function Widgets({ isMobile }, ref) {
   const [earnings, setEarnings] = useState([
@@ -18,11 +21,15 @@ function Widgets({ isMobile }, ref) {
     15000, 25000, 20000, 30000, 25000, 40000
   ]);
   const [revenueSources, setRevenueSources] = useState([55, 30, 15]);
+  const [directorsPerformance, setDirectorsPerformance] = useState([50, 70, 33, 81, 60]);
+  const [teamsPerformance, setTeamsPerformance] = useState([60, 42, 78, 89]);
 
   useImperativeHandle(ref, () => ({
     randomize() {
-      const newEarnings = MONTHS.map(() => random(0, 60000));
-      setEarnings(newEarnings);
+      setEarnings(MONTHS.map(() => random(0, 60000)));
+      setDirectorsPerformance(DIRECTORS.map(() => random(0, 100)));
+      setTeamsPerformance(TEAMS.map(() => random(0, 100)));
+
       let maxRevenueSource = 100;
 
       const newRevenueSources = REVENUE_SOURCES.map((r, i) => {
@@ -51,6 +58,18 @@ function Widgets({ isMobile }, ref) {
       </Widget>
       <Widget title="Revenue Sources" size={"quarter"}>
         <Doughnut labels={REVENUE_SOURCES} data={revenueSources} />
+      </Widget>
+      <Widget title="Directors Performance" size={"half"}>
+        <Bar
+          title="Directors Performance"
+          labels={DIRECTORS}
+          data={directorsPerformance} />
+      </Widget>
+      <Widget title="Teams Performance" size={"half"}>
+        <Bar
+          title="Teams Performance"
+          labels={TEAMS}
+          data={teamsPerformance} />
       </Widget>
     </div>
   );

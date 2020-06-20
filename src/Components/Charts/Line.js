@@ -69,7 +69,7 @@ const DEFAULT_OPTIONS = {
     mode: 'index',
     caretPadding: 10,
     callbacks: {
-      label: function(tooltipItem, chart) {
+      label: (tooltipItem, chart) => {
         const datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
         return `${datasetLabel} ${CurrencyFormatter(tooltipItem.yLabel)}`;
       }
