@@ -39,7 +39,7 @@ function Stats(props, ref) {
         progress={tasks}
         title="Tasks"
         content={`${tasks}%`}
-        icon="fa-dollar-sign"
+        icon="fa-clipboard-list"
         type="info" />
       <Stat
         title="Pending Requests"
