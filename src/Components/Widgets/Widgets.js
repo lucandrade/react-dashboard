@@ -3,6 +3,7 @@ import { random } from "lodash";
 
 import Line from "../Charts/Line";
 import Widget from "./Widget";
+import Doughnut from "../Charts/Doughnut";
 
 const MONTHS = [
   "Jan","Feb","Mar","Apr","May","Jun",
@@ -30,6 +31,9 @@ function Widgets({ isMobile }, ref) {
           title="Earnings"
           labels={MONTHS}
           data={earnings} />
+      </Widget>
+      <Widget title="Revenue Sources" size={"quarter"}>
+        <Doughnut />
       </Widget>
     </div>
   );

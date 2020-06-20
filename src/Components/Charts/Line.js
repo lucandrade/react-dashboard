@@ -23,7 +23,7 @@ const DEFAULT_DATA = {
   }],
 };
 
-const options = {
+const DEFAULT_OPTIONS = {
   maintainAspectRatio: false,
   layout: {
     padding: {},
@@ -81,7 +81,7 @@ function Line({ title, labels, data, addPadding }) {
   DEFAULT_DATA.labels = labels;
   DEFAULT_DATA.datasets[0].label = title;
   DEFAULT_DATA.datasets[0].data = data;
-  options.layout.padding = !addPadding ? {
+  DEFAULT_OPTIONS.layout.padding = !addPadding ? {
     left: 0,
     right: 0,
     top: 0,
@@ -95,7 +95,7 @@ function Line({ title, labels, data, addPadding }) {
 
   return (
     <div className="chart-area">
-      <Chart data={DEFAULT_DATA} options={options} />
+      <Chart data={DEFAULT_DATA} options={DEFAULT_OPTIONS} />
     </div>
   );
 }
