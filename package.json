@@ -1,13 +1,15 @@
 {
-  "name": "dashboard",
+  "name": "react-dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lucandrade.github.io/react-dashboard",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "color": "^3.1.2",
     "currency-formatter": "^1.5.5",
+    "gh-pages": "^3.0.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "randomcolor": "^0.5.4",
@@ -20,7 +22,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cleanup": "rm -rf node_modules/gh-pages/.cache",
+    "predeploy": "yarn build",
+    "deploy": "yarn cleanup && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
