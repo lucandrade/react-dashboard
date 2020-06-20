@@ -10,16 +10,33 @@ const MONTHS = [
   "Jul","Aug","Sep","Oct","Nov","Dec"
 ];
 
+const REVENUE_SOURCES = ["Direct", "Referral", "Social"];
+
 function Widgets({ isMobile }, ref) {
   const [earnings, setEarnings] = useState([
     0, 10000, 5000, 15000, 10000, 20000,
     15000, 25000, 20000, 30000, 25000, 40000
   ]);
+  const [revenueSources, setRevenueSources] = useState([55, 30, 15]);
 
   useImperativeHandle(ref, () => ({
     randomize() {
-      const newEarnings = MONTHS.map(() => random(0, 900000));
+      const newEarnings = MONTHS.map(() => random(0, 60000));
       setEarnings(newEarnings);
+      let maxRevenueSource = 100;
+
+      const newRevenueSources = REVENUE_SOURCES.map((r, i) => {
+        if (i === REVENUE_SOURCES.length - 1) {
+          return maxRevenueSource;
+        }
+
+        const newRevenueSource = random(0, maxRevenueSource);
+        maxRevenueSource -= newRevenueSource;
+
+        return newRevenueSource;
+      });
+
+      setRevenueSources(newRevenueSources);
     }
   }));
 
@@ -33,7 +50,7 @@ function Widgets({ isMobile }, ref) {
           data={earnings} />
       </Widget>
       <Widget title="Revenue Sources" size={"quarter"}>
-        <Doughnut />
+        <Doughnut labels={REVENUE_SOURCES} data={revenueSources} />
       </Widget>
     </div>
   );

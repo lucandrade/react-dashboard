@@ -1,10 +1,11 @@
 import React from "react";
 import { Doughnut as Chart } from "react-chartjs-2";
+import RandomColor from 'randomcolor';
+import Color from 'color';
+import PropTypes from "prop-types";
 
 const DEFAULT_DATA = {
-  labels: ["Direct", "Referral", "Social"],
   datasets: [{
-    data: [55, 30, 15],
     backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
     hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
     hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -29,25 +30,40 @@ const DEFAULT_OPTIONS = {
   cutoutPercentage: 80,
 };
 
-function Doughnut() {
+function Doughnut({ labels, data }) {
+  DEFAULT_DATA.labels = labels;
+  DEFAULT_DATA.datasets[0].data = data;
+
+  const backgroundColors = RandomColor({
+    count: labels.length,
+    hue: 'random',
+  });
+
+  const hoverBackgroundColors = backgroundColors.map(c => Color(c).darken(0.3).string());
+
+  DEFAULT_DATA.datasets[0].backgroundColor = backgroundColors;
+  DEFAULT_DATA.datasets[0].hoverBackgroundColor = hoverBackgroundColors;
+
   return (
     <>
       <div className="chart-pie">
         <Chart data={DEFAULT_DATA} options={DEFAULT_OPTIONS} />
       </div>
       <div className="mt-4 text-center small">
-          <span className="mr-2">
-            <i className="fas fa-circle text-primary" /> Direct
+        {labels.map((label, i) => (
+          <span key={label} className="mr-2">
+            <i className="fas fa-circle" style={{ color: backgroundColors[i] }} />
+            {` ${label} (${data[i]})`}
           </span>
-        <span className="mr-2">
-          <i className="fas fa-circle text-success" /> Social
-        </span>
-        <span className="mr-2">
-          <i className="fas fa-circle text-info" /> Referral
-        </span>
+        ))}
       </div>
     </>
   );
 }
+
+Doughnut.propTypes = {
+  labels: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+};
 
 export default Doughnut;
