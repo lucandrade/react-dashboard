@@ -37,6 +37,9 @@ const DEFAULT_OPTIONS = {
         display: false,
         drawBorder: false
       },
+      ticks: {
+        maxTicksLimit: 6,
+      }
     }],
     yAxes: [{
       ticks: {
