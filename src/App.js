@@ -4,6 +4,7 @@ import SideBar from "./Components/SideBar";
 import TopBar from "./Components/TopBar";
 import PageTitle from "./Components/PageTitle";
 import Stats from "./Components/Stats/Stats";
+import Widget from "./Components/Widget";
 
 export default function App() {
   const statsRef = createRef();
@@ -34,6 +35,11 @@ export default function App() {
         <div className="container-fluid">
           <PageTitle onRandomize={randomize} />
           <Stats ref={statsRef} />
+          <div className="row">
+            <Widget title="My Widget" size={"threeQuarter"}>
+              <span>Content</span>
+            </Widget>
+          </div>
         </div>
       </div>
     </div>
